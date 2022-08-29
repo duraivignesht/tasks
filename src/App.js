@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './App.css';
 import { Header } from './components/Header/Header'
 import { ProductGrid } from './components/ProductGrid/ProductGrid';
@@ -14,11 +14,14 @@ function App() {
 	
   const [data, setData] = useState();
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const getProductPreview = useCallback((val) => {
+    setSelectedProduct(val);
+  },[]);
 
   return (
     <div className="App">
       <Header text={data?.headerText} />
-      <ProductGrid products={data?.products} />
+      <ProductGrid products={data?.products} handleClick={getProductPreview} />
       <ProductPreview key={selectedProduct?.description} product={selectedProduct} />
     </div>
   );
