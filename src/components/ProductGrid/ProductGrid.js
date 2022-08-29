@@ -2,13 +2,20 @@ import React from 'react';
 import { ProductPod } from '../ProductPod/ProductPod';
 import './ProductGrid.scss';
 
-export const ProductGrid = ({ products }) => {
+export const ProductGrid = ({ products,handleClick }) => {
   if (!products?.length) return null;
-  /*let a = products.map((e)=>e.brand);
-  console.log("List"+a)*/
   return (
-    <article className='product-grid1'>
-    <ProductPod product={products} />
+    <article className='product-grid'>
+    {
+      
+      products.map((products,index)=>
+      {
+      return  ( <ProductPod key={index} product={products} handleClick={handleClick} />
+      )
+    }
+      )
+    }
+    
       {/* TODO: Render a ProductPod for each product */}
     </article>
   );
