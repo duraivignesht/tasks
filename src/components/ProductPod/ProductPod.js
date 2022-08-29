@@ -1,53 +1,36 @@
-import React, { useState } from 'react';
-import { ProductPreview } from '../ProductPreview/ProductPreview';
+import React, {useState} from 'react';
+
 import { Price } from '../Price/Price';
 import './ProductPod.scss'
 
+export const context = React.createContext();
 
-export const ProductPod = ({ product }) => {
-   const [productPrev, setproductPrev] = useState();
-
-/*  let a = product.map((product)=>product.brand);
-  console.log("Listinf"+a)*/
-
+export const ProductPod = ({ product,handleClick }) => {
   if (!product) return null;
-
+  const getSingleProduct = (product) => {
+    let data = {"image":product.image,"brand":product.brand,"description":product.description,"price":product.price};
+    handleClick(data);
+  };
   return (
-    
-    <>
+    <article className='product-pod' onClick={() => { getSingleProduct(product); }}>
       {/* TODO: make DRY with a ProductImage component */}
-          <article className='product-grid'>
-
-    {  
-      product.map((product) => 
-        <div className='product-pod' onClick={()=>setproductPrev({"image":product.image,"brand":product.brand,"description":product.description,"price":product.price})}>
-{product.image && 
+      {product.image && 
         <img
           src={product.image} 
           alt="Home Depot logo"
         />
-      }
+      } 
       {product.brand && 
         <b>
           {product.brand}
-        </b>
-        }<br />
+        </b> 
+        } <br />
       {product.description && 
         <span>
           {product.description}
         </span>
-      }
-
-            <Price product={product} />
-
-</div>
-        )
-
-    }
+      } 
+      <Price product={product} />
     </article>
-
-    <ProductPreview product={productPrev} />
-  
-    </>
-      );
+  );
 };
