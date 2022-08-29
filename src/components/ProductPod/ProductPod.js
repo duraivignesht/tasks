@@ -3,8 +3,6 @@ import React, {useState} from 'react';
 import { Price } from '../Price/Price';
 import './ProductPod.scss'
 
-export const context = React.createContext();
-
 export const ProductPod = ({ product,handleClick }) => {
   if (!product) return null;
   const getSingleProduct = (product) => {
