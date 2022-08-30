@@ -10,9 +10,6 @@ export const ProductPreview = ({ product }) => {
     showSpecialPrice: false
 });
   if (!product) return null;
-  const wraps = {
-    showSpecialPrice: true
-}
   return (
     <article className="product-preview">
       {/* TODO: make DRY with a ProductImage component */}
