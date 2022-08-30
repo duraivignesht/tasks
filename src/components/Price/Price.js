@@ -10,16 +10,14 @@ export const Price = ({ product, showSpecialPrice = false }) => {
 
   const wasPrice = slowTransformation(product?.price);
   const nowPrice = showSpecialPrice ? slowTransformation(specialPrice) : slowTransformation(product?.price);
-  
   useEffect(() => {
     if (product) {
       function fetchSpecialPrice() {
         // TODO: get data from slowApi (argument product.price)
-        console.log("ProdPrice"+product?.price)
+      //  console.log("ProdPrice"+product?.price)
         slowApi(product.price).then((data)=>setSpecialPrice(data))
         // setSpecialPrice(data);
       }
-      
       fetchSpecialPrice();
     }
   }, [product]);
