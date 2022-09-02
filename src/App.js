@@ -1,28 +1,32 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useEffect,useState} from 'react';
 import './App.css';
-import { Header } from './components/Header/Header'
-import { ProductGrid } from './components/ProductGrid/ProductGrid';
-import { ProductPreview } from './components/ProductPreview/ProductPreview';
+import { Home } from './Home'
+import { ProductPreviewDetail } from './components/ProductPreview/ProductPreviewDetail';
+import {Routes, Route} from "react-router-dom";
 import { getProducts } from './api';
 
+export const context = React.createContext();
+
 function App() {
- useEffect(() => {
+
+  useEffect(() => {
     getProducts().then(
     	(data)=>setData(data)
     )
 },[]);
 	
   const [data, setData] = useState();
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const getProductPreview = useCallback((val) => {
-    setSelectedProduct(val);
-  },[]);
 
   return (
     <div className="App">
-      <Header text={data?.headerText} />
-      <ProductGrid products={data?.products} handleClick={getProductPreview} />
-      <ProductPreview key={selectedProduct?.description} product={selectedProduct} />
+      <context.Provider value={data}>
+      <Routes>
+        <Route path="/" exact element={<Home datas={data} />} />
+        <Route path="/productdetail/:id" exact element={<ProductPreviewDetail singleProduct={data?.products} />} />
+      </Routes>
+      </context.Provider>
+
+      
     </div>
   );
 }
