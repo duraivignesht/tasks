@@ -1,22 +1,26 @@
 import React from 'react';
 import { ProductPod } from '../ProductPod/ProductPod';
 import './ProductGrid.scss';
+import PropTypes from 'prop-types';
 
 export const ProductGrid = ({ products,handleClick }) => {
   if (!products?.length) return null;
   return (
     <article className='product-grid'>
     {
-      
       products.map((products,index)=>
       {
-      return  ( <ProductPod key={index} product={products} handleClick={handleClick} />
+      return  ( <ProductPod key={"prod"+index} product={products} handleClick={handleClick} />
       )
     }
       )
     }
-    
       {/* TODO: Render a ProductPod for each product */}
     </article>
   );
 };
+
+ProductGrid.propTypes = {
+  products: PropTypes.array,
+  handleClick:PropTypes.func
+}
