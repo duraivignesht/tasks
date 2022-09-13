@@ -10,7 +10,6 @@ import { ShopCart } from './components/Cart/ShopCart';
 export const context = React.createContext();
 
 export const ADD_PRODUCT = "ADD_PRODUCT";
-export const REMOVE_PRODUCT = "REMOVE_PRODUCT";
 
 const addProductToCarts = (product, state) => {
   const updatedCart = [...state.cart];
@@ -23,10 +22,6 @@ export const shopReducer = (state, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
       return addProductToCarts(action.product, state);
-
-    case REMOVE_PRODUCT:
-      return state;
-
     default:
       return state;
   }
